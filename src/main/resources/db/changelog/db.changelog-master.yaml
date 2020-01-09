@@ -1,0 +1,129 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - changeSet:
+      id: 1
+      author: Andrey
+      changes:
+        - createTable:
+            tableName: themes
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+              - column:
+                  name: dta1
+                  type: date
+              - column:
+                  name: dta2
+                  type: date
+              - column:
+                  name: active
+                  type: int                  
+  - changeSet:
+      id: 2
+      author: Andrey
+      changes:
+        - insert:
+            tableName: themes
+            columns:
+              - column:
+                  name: name
+                  value: "Опрос 1"
+              - column:
+                  name: dta1
+                  value: "2020/01/01"
+              - column:
+                  name: dta2
+                  value: "2020/02/01"
+              - column:
+                  name: active
+                  value: "1"                  
+  - changeSet:
+      id: 3
+      author: Andrey
+      changes:
+        - createTable:
+            tableName: questions
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: parent
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk1
+                    references: themes(id)
+                    onDelete: CASCADE
+                    onUpdate: CASCADE
+              - column:
+                  name: name
+                  type: varchar(50)
+              - column:
+                  name: ord
+                  type: int                  
+  - changeSet:
+      id: 4
+      author: Andrey
+      changes:                  
+        - insert:
+            tableName: questions
+            columns:
+              - column:
+                  name: parent
+                  value: "1"                
+              - column:
+                  name: name
+                  value: "Вопрос 1"
+              - column:
+                  name: ord
+                  value: "0"                   
+        - insert:
+            tableName: questions
+            columns:
+              - column:
+                  name: parent
+                  value: "1"                
+              - column:
+                  name: name
+                  value: "Вопрос 2"
+              - column:
+                  name: ord
+                  value: "1"                  
+        - insert:
+            tableName: questions
+            columns:
+              - column:
+                  name: parent
+                  value: "1"                
+              - column:
+                  name: name
+                  value: "Вопрос 3"
+              - column:
+                  name: ord
+                  value: "2"                   
+        - insert:
+            tableName: questions
+            columns:
+              - column:
+                  name: parent
+                  value: "1"                
+              - column:
+                  name: name
+                  value: "Вопрос 4"
+              - column:
+                  name: ord
+                  value: "3"                   
+          
